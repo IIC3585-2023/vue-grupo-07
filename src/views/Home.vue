@@ -4,5 +4,5 @@
 </template>
 
 <script setup>
-import CounterButton from '../components/CounterButton.vue';
+import CounterButton from '@/components/CounterButton.vue';
 </script>
