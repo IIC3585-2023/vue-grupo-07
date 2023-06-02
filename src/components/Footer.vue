@@ -6,7 +6,7 @@
 
 <style scoped>
 footer {
-  background-color: #f0f0f0;
+  background-color: #74cd0f29;
   width: 100%;
   flex-shrink: 0;
   display: flex;

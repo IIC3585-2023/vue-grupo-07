@@ -2,8 +2,8 @@
   <div class="app">
     <Navbar />
     <div class="main_container">
-      <Sidebar />
-      <div class="page_content">
+      <Sidebar @toggle-sidebar="handleToggleSidebar" />
+      <div class="page_content colapse">
         <router-view />
       </div>
     </div>
@@ -22,6 +22,13 @@ export default {
     Sidebar,
     Footer,
   },
+  methods: {
+    handleToggleSidebar() {
+      // Toggle the visibility of the wiki sub-menu
+      const page_content = document.querySelector('.page_content');
+      page_content.classList.toggle('colapse');
+    },
+  },
 };
 </script>
 
@@ -30,7 +37,6 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  min-width: 100vw;
   padding: 0;
 }
 
@@ -40,9 +46,11 @@ export default {
 }
 
 .page_content {
-  padding: 1rem;
   display: flex;
   justify-content: center;
-  width: 100%;
+  padding-left: 200px;
+}
+.page_content.colapse {
+  padding-left: 2.5rem;
 }
 </style>
