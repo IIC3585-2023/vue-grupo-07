@@ -23,17 +23,17 @@
     </div>
 
     <div class="category_section">
-      <div class="category_item">
+      <div class="category_item"  @click="$event => redirectTo('/wiki/characters')">
         <img src="@/assets/characters.jpg" alt="Characters" />
         <h2>Personajes</h2>
         <p>Descubre más sobre los personajes de Rick and Morty.</p>
       </div>
-      <div class="category_item">
+      <div class="category_item" @click="$event => redirectTo('/wiki/locations')">
         <img src="@/assets/locations.jpg" alt="Locations" />
         <h2>Localizaciones</h2>
         <p>Explora los diferentes lugares en el universo de Rick and Morty.</p>
       </div>
-      <div class="category_item">
+      <div class="category_item" @click="$event => redirectTo('/wiki/episodes')">
         <img src="@/assets/episodes.jpg" alt="Episodes" />
         <h2>Episodios</h2>
         <p>Revive tus episodios favoritos y descubre nuevos.</p>
@@ -42,8 +42,16 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import CounterButton from '@/components/CounterButton.vue';
+export default {
+  methods: {
+    redirectTo(route) {
+      // Perform the redirect to the specified route
+      this.$router.push(route);
+    },
+  }
+}
 </script>
 
 <style scoped>
