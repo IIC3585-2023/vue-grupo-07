@@ -43,12 +43,15 @@ export default {
 .main_container {
   flex-grow: 1;
   display: flex;
+  min-width: calc(100vw - 17px); 
+  max-width: 100vw; 
 }
 
 .page_content {
   display: flex;
   justify-content: center;
   padding-left: 200px;
+  width: 100%;
 }
 .page_content.colapse {
   padding-left: 2.5rem;
