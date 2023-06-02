@@ -65,7 +65,7 @@ export async function getAllLocations(page) {
         const resident = await getCharacterById(false, residentUrl)
         residents.push({id: resident.id, name:resident.name, image: resident.image })
       }
-      location.residents = residents
+      location.characters = residents
     }
     return loacationsArray
   } catch (error) {

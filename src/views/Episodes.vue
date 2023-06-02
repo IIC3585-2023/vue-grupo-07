@@ -2,7 +2,7 @@
   <div>
     <page-header :title="title" :search-term="searchTerm" @update:searchTerm="searchTerm = $event"></page-header>
     <div class="card-container">
-      <episode-card v-for="item in filteredItems" :key="item.id" :episode="item"></episode-card>
+      <tooggle-card v-for="item in filteredItems" :key="item.id" :entity="item" :origin="title"></tooggle-card>
     </div>
     <pagination :totalPages=totalPages @page-change="fetchEpisodes"></pagination>
   </div>
@@ -11,12 +11,12 @@
 <script>
 import PageHeader from '../components/PageHeader.vue';
 import Pagination from '../components/Pagination.vue';
-import EpisodeCard from '../components/EpisodeCard.vue';
+import TooggleCard from '../components/TooggleCard.vue';
 import { getAllEpisodes} from '../sevices';
 
 export default {
   components: {
-    EpisodeCard,
+    TooggleCard,
     PageHeader,
     Pagination
   },
@@ -64,7 +64,7 @@ export default {
   padding: 10px;
 }
 
-.episode-card {
+.tooggle-card {
   width: calc(80vw);
   margin-bottom: 20px;
 }

@@ -1,15 +1,22 @@
 <template>
-  <div class="episode-card">
+  <div class="tooggle-card">
     <div class="card-header">
-      <h3>{{ episode.name }}</h3>
-      <p><span>Fecha: </span>{{ episode.air_date }}</p>
-      <p><span>Episodio: </span>{{ episode.episode }}</p>
+      <h3>{{ entity.name }}</h3>
+      <p v-if="origin == 'Episodios'"><span>Fecha: </span>{{ entity.air_date }}</p>
+      <p v-if="origin == 'Episodios'"><span>Episodio: </span>{{ entity.episode }}</p>
+      <p v-if="origin == 'Lugares'"><span>Tipo: </span>{{ entity.type }}</p>
+      <p v-if="origin == 'Lugares'"><span>Dimensión: </span>{{ entity.dimension }}</p>
       <button @click="toggleCharacters" class="arrow-button">
         <i :class="{'arrow-up': showCharacters, 'arrow-down': !showCharacters}"></i>
       </button>
     </div>
     <div class="card-content" v-show="showCharacters">
-      <h4>Personajes:</h4>
+      <div v-if="origin == 'Episodios'">
+        <h4>Personajes:</h4>
+      </div>
+      <div v-if="origin == 'Lugares'">
+        <h4>Residentes:</h4>
+      </div>
       <div class="character-row" v-for="(row, rowIndex) in characterRows" :key="rowIndex">
         <div class="character-item" v-for="(character, index) in row" :key="index">
           <img :src="character.image" :alt="character.name" class="character-image" />
@@ -23,8 +30,12 @@
 <script>
 export default {
   props: {
-    episode: {
+    entity: {
       type: Object,
+      required: true
+    },
+    origin: {
+      origin: String,
       required: true
     }
   },
@@ -35,7 +46,7 @@ export default {
   },
   computed: {
     characterRows() {
-      const characters = this.episode.characters;
+      const characters = this.entity.characters;
       const rows = [];
       const rowSize = 5;
 
@@ -55,7 +66,7 @@ export default {
 </script>
 
 <style>
-.episode-card {
+.tooggle-card {
   background-color: #f5f5f5;
   border: 1px solid #ddd;
   border-radius: 4px;
