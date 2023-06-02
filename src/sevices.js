@@ -11,7 +11,8 @@ export async function getAllCharacters(page) {
       const { id, name, image } = character;
       return { id, name, image };
     });
-    return characters
+    const charactersArray = Object.values(characters);
+    return charactersArray
   } catch (error) {
     console.log(error)
   }
@@ -38,7 +39,8 @@ export async function getAllEpisodes(page) {
       const { id, name, episode, air_date } = ep;
       return { id, name, episode, air_date };
     });
-    return episodes
+    const episodesArray = Object.values(episodes);
+    return episodesArray
   } catch (error) {
     console.log(error)
   }
@@ -65,7 +67,8 @@ export async function getAllLocations(page) {
       const { id, name, type, dimension } = location;
       return { id, name, type, dimension };
     });
-    return locations
+    const loacationsArray = Object.values(locations);
+    return loacationsArray
   } catch (error) {
     console.log(error)
   }

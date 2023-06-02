@@ -7,9 +7,9 @@
       <li @click="redirectTo('/')">Home</li>
       <li @click="toggleWiki">Wiki</li>
       <ul v-show="showWiki">
-        <li>Characters</li>
-        <li>Locations</li>
-        <li>Episodes</li>
+        <li @click="$event => redirectTo('/wiki/characters')">Characters</li>
+        <li @click="$event => redirectTo('/wiki/locations')">Locations</li>
+        <li @click="$event => redirectTo('/wiki/episodes')">Episodes</li>
       </ul>
     </ul>
   </div>
