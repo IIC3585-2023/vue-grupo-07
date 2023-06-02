@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const api_url = import.meta.env.VITE_API_URL
+const apiUrl = import.meta.env.VITE_API_URL
 
 export async function getAllCharacters(page) {
   try {
     const res = await axios.get(
-      `${api_url}/character?page=${page}`
+      `${apiUrl}/character?page=${page}`
     );
     const characters = res.data.results.map(character => {
       const { id, name, image } = character;
@@ -18,10 +18,11 @@ export async function getAllCharacters(page) {
   }
 }
 
-export async function getCharacterById(character_id) {
+export async function getCharacterById(character_id, url = false) {
+  const correctUrl = url? url: `${apiUrl}/character/${character_id}`
   try {
     const res = await axios.get(
-      `${api_url}/character/${character_id}`
+      correctUrl
     );
     const character = res.data
     return character
@@ -33,26 +34,19 @@ export async function getCharacterById(character_id) {
 export async function getAllEpisodes(page) {
   try {
     const res = await axios.get(
-      `${api_url}/episode?page=${page}`
+      `${apiUrl}/episode?page=${page}`
     );
-    const episodes = res.data.results.map(ep => {
-      const { id, name, episode, air_date } = ep;
-      return { id, name, episode, air_date };
-    });
+    const episodes = res.data.results
     const episodesArray = Object.values(episodes);
+    for(let episode of episodesArray){
+      const characters = []
+      for(let characterUrl of episode.characters){
+        const character = await getCharacterById(false, characterUrl)
+        characters.push({id: character.id, name:character.name, image: character.image })
+      }
+      episode.characters = characters
+    }
     return episodesArray
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-export async function getEpisodeById(episode_id) {
-  try {
-    const res = await axios.get(
-      `${api_url}/episode/${episode_id}`
-    );
-    const episode = res.data
-    return episode
   } catch (error) {
     console.log(error)
   }
@@ -61,26 +55,19 @@ export async function getEpisodeById(episode_id) {
 export async function getAllLocations(page) {
   try {
     const res = await axios.get(
-      `${api_url}/location?page=${page}`
+      `${apiUrl}/location?page=${page}`
     );
-    const locations = res.data.results.map(location => {
-      const { id, name, type, dimension } = location;
-      return { id, name, type, dimension };
-    });
+    const locations = res.data.results
     const loacationsArray = Object.values(locations);
+    for(let location of loacationsArray){
+      const residents = []
+      for(let residentUrl of location.residents){
+        const resident = await getCharacterById(false, residentUrl)
+        residents.push({id: resident.id, name:resident.name, image: resident.image })
+      }
+      location.residents = residents
+    }
     return loacationsArray
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-export async function getLocationById(location_id) {
-  try {
-    const res = await axios.get(
-      `${api_url}/location/${location_id}`
-    );
-    const location = res.data
-    return location
   } catch (error) {
     console.log(error)
   }
