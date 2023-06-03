@@ -18,17 +18,24 @@
         <h4>Residentes:</h4>
       </div>
       <div class="character-row" v-for="(row, rowIndex) in characterRows" :key="rowIndex">
-        <div class="character-item" v-for="(character, index) in row" :key="index">
-          <img :src="character.image" :alt="character.name" class="character-image" />
+        <div class="character-item" v-for="(character, index) in row" :key="index" @click="openModal(character.id)">
+          <img :src="character.image" :alt="character.name" class="resident-image" />
           <span>{{ character.name }}</span>
         </div>
       </div>
     </div>
+    <character-detail-modal v-if="showModal" :characterId="characterIdSelected" @close-modal="showModal = false" ></character-detail-modal>
+
   </div>
 </template>
 
 <script>
+import CharacterDetailModal from './CharacterDetailModal.vue';
+
 export default {
+  components: {
+    CharacterDetailModal
+  },
   props: {
     entity: {
       type: Object,
@@ -41,7 +48,9 @@ export default {
   },
   data() {
     return {
-      showCharacters: false
+      showCharacters: false,
+      showModal: false,
+      characterIdSelected: null
     };
   },
   computed: {
@@ -60,8 +69,12 @@ export default {
   methods: {
     toggleCharacters() {
       this.showCharacters = !this.showCharacters;
-    }
-  }
+    },
+    openModal(characterId) {
+      this.characterIdSelected = characterId;
+      this.showModal = true
+    },
+  },
 };
 </script>
 
@@ -135,7 +148,7 @@ export default {
   }
 }
 
-.character-image {
+.resident-image {
   width: 40px;
   height: 40px;
   border-radius: 50%;
