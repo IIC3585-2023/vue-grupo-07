@@ -23,6 +23,11 @@ const routes = [
     name: 'locations',
     component: () => import('@/views/Locations.vue'),
   },
+  {
+    path: '/recommendation',
+    name: 'recommendations',
+    component: () => import('@/views/Recommendation.vue'),
+  },
 ];
 
 const router = createRouter({
