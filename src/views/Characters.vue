@@ -1,10 +1,21 @@
 <template>
   <div>
-    <page-header :title="title" :search-term="searchTerm" @update:searchTerm="searchTerm = $event"></page-header>
+    <page-header
+      :title="title"
+      :search-term="searchTerm"
+      @update:searchTerm="searchTerm = $event"
+    ></page-header>
     <div class="card-container">
-      <character-card v-for="item in filteredItems" :key="item.id" :character="item"></character-card>
+      <character-card
+        v-for="item in filteredItems"
+        :key="item.id"
+        :character="item"
+      ></character-card>
     </div>
-    <pagination :totalPages=totalPages @page-change="fetchCharacters"></pagination>
+    <pagination
+      :totalPages="totalPages"
+      @page-change="fetchCharacters"
+    ></pagination>
   </div>
 </template>
 
@@ -12,35 +23,35 @@
 import PageHeader from '../components/PageHeader.vue';
 import Pagination from '../components/Pagination.vue';
 import CharacterCard from '../components/CharacterCard.vue';
-import { getAllCharacters} from '../sevices';
+import { getAllCharacters } from '../sevices';
 
 export default {
   components: {
     CharacterCard,
     PageHeader,
-    Pagination
+    Pagination,
   },
   data() {
     return {
       items: [],
       totalPages: 42,
       searchTerm: '',
-      title: "Personajes"
+      title: 'Personajes',
     };
   },
-  
+
   created() {
     this.fetchCharacters(1);
   },
-  
+
   computed: {
     filteredItems() {
-      const filtered = this.items.filter(item =>
+      const filtered = this.items.filter((item) =>
         item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
       return filtered;
     },
-  },  
+  },
 
   methods: {
     async fetchCharacters(page) {
@@ -50,8 +61,8 @@ export default {
       } catch (error) {
         console.error('Error al obtener los personajes:', error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

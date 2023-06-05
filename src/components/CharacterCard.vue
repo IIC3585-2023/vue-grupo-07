@@ -1,10 +1,14 @@
 <template>
   <div class="character-card" @click="showModal = true">
-    <img :src="character.image" alt="Character Image">
+    <img :src="character.image" alt="Character Image" />
     <div class="card-content">
       <h3>{{ character.name }}</h3>
     </div>
-    <character-detail-modal v-show="showModal" :characterId="character.id" @close-modal="showModal = false" ></character-detail-modal>
+    <character-detail-modal
+      v-show="showModal"
+      :characterId="character.id"
+      @close-modal="showModal = false"
+    ></character-detail-modal>
   </div>
 </template>
 
@@ -13,21 +17,20 @@ import CharacterDetailModal from './CharacterDetailModal.vue';
 
 export default {
   components: {
-    CharacterDetailModal
+    CharacterDetailModal,
   },
   props: {
     character: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      showModal: false
-    }
-  }
+      showModal: false,
+    };
+  },
 };
-
 </script>
 
 <style>
@@ -38,6 +41,7 @@ export default {
   margin-bottom: 16px;
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .character-card img {

@@ -3,7 +3,9 @@
     <div class="modal" @click.stop>
       <div class="modal-header">
         <h6>{{ character?.name }}</h6>
-        <button class="close-button" @click="$emit('close-modal')">&times;</button>
+        <button class="close-button" @click="$emit('close-modal')">
+          &times;
+        </button>
       </div>
       <div class="modal-body">
         <div class="character-image">
@@ -29,13 +31,13 @@ export default {
   props: {
     characterId: {
       type: Number,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      character: null
-    }
+      character: null,
+    };
   },
   created() {
     this.fetchCharacterDetails();
@@ -48,13 +50,12 @@ export default {
       } catch (error) {
         console.error('Error al obtener los detalles del personaje:', error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -65,6 +66,7 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  cursor: default;
 }
 
 .modal {
@@ -126,7 +128,7 @@ export default {
 }
 
 .character-details li::before {
-  content: "•";
+  content: '•';
   margin-right: 4px;
 }
 </style>
