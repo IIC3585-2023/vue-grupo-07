@@ -1,4 +1,19 @@
 <template>
+  
+    
+  <div class="web-component">
+    <retail-card
+      imgUrl="https://polerasaunclick.cl/wp-content/uploads/2020/03/FRENTE-RICK-MORTY.png"
+      brand="Nostalgic"
+      name="R&M T-shirt"
+      price="20"
+      description="Made with high quality materials that guarantee comfort and durability. The t-shirt features a vibrant and colorful design that highlights the main characters, Rick and Morty, in a fun and dynamic illustration."
+      ratingStyle="star-2"
+      ecofriendly="false"
+      discount="60"
+      currency="$"
+    ></retail-card>
+  </div>
   <div class="landing_container">
     <img src="@/assets/ram_wallpaper.jpg" alt="Rick and morty wallpaper" />
     <div class="home_section">
@@ -43,7 +58,9 @@
 </template>
 
 <script>
-import CounterButton from '@/components/CounterButton.vue';
+import 'http://127.0.0.1:5173/src/litRetailCard.js';
+import 'http://127.0.0.1:5173/src/treeItem.js'
+
 export default {
   methods: {
     redirectTo(route) {
@@ -125,5 +142,20 @@ export default {
 
 .category_item p {
   font-size: 1.2rem;
+}
+
+.web-component{
+  position: fixed;
+  top: 50px;
+  left: 50px;
+  z-index: 9999;
+
+}
+.tree{
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  z-index: 9999;
+  background-color: white;
 }
 </style>
